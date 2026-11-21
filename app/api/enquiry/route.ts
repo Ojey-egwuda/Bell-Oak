@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { enquirySchema, type Enquiry } from "@/lib/enquiry";
-import { site } from "@/lib/site";
+import { buildEnquiryEmail } from "@/lib/enquiry-email";
 
 // Simple per-instance rate limit: 5 enquiries per IP per 10 minutes.
 // Good enough for a brochure site; use a shared store (e.g. Upstash) if traffic grows.
@@ -30,17 +30,7 @@ async function sendEmail(enquiry: Enquiry) {
     return false;
   }
 
-  const text = [
-    `New ${enquiry.enquiryType.toLowerCase()} from the ${site.name} website`,
-    "",
-    `Name: ${enquiry.fullName}`,
-    `Email: ${enquiry.email}`,
-    `Phone: ${enquiry.phone || "Not given"}`,
-    `Enquiry type: ${enquiry.enquiryType}`,
-    "",
-    "Message:",
-    enquiry.message,
-  ].join("\n");
+  const { subject, html, text } = buildEnquiryEmail(enquiry);
 
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -49,7 +39,8 @@ async function sendEmail(enquiry: Enquiry) {
       from,
       to: to.split(",").map((s) => s.trim()),
       reply_to: enquiry.email,
-      subject: `Website enquiry: ${enquiry.enquiryType} from ${enquiry.fullName}`,
+      subject,
+      html,
       text,
     }),
   });
