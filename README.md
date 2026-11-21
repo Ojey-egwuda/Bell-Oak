@@ -1,61 +1,76 @@
 # Bell Oak Holdings Ltd website
 
-Brochure website for Bell Oak Holdings Ltd (company no. 17464434), built with Next.js 15, React 19 and Tailwind CSS 3. The design, colours and fonts match the approved design file.
+The official website of Bell Oak Holdings Ltd (company no. 17464434), a UK real estate investment and asset management company, live at https://www.belloakholdings.co.uk.
 
-## Run it locally
+## What's on the site
 
-Requires Node.js 18.18 or newer.
+- **Home page** (`/`), in this order:
+  - Hero
+  - About Us, including the company's core principles
+  - Our Services
+  - Why Choose Bell Oak Holdings
+  - Investment Strategy
+  - Contact Us, with the enquiry form
+- **Privacy notice** at `/privacy`
+- **404 page** for any address that doesn't exist
+
+## Enquiry form
+
+The form collects the enquirer's full name, email address, phone number (optional), enquiry type and message.
+
+- Submissions are validated on the server and emailed to the company via Resend. Replies go straight to the enquirer (`reply_to`).
+- Spam protection: a hidden honeypot field, plus a limit of 5 enquiries per IP address every 10 minutes.
+- When run locally without the email settings, enquiries are logged to the terminal instead of being emailed.
+
+## Tech stack
+
+- Next.js 15 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS 3
+- Self-hosted fonts: Playfair Display and Plus Jakarta Sans, via Fontsource
+- Zod (form validation)
+
+## Project structure
+
+| Path | What it is |
+| --- | --- |
+| `app/` | Pages and layout: home page, privacy notice, 404 page, sitemap and robots |
+| `components/` | The home page sections, header, footer and enquiry form |
+| `lib/site.ts` | Company details, navigation links and enquiry types |
+| `lib/enquiry.ts` | Validation schema for the enquiry form |
+| `app/api/enquiry/route.ts` | Receives enquiries, applies the rate limit and sends the email |
+| `tailwind.config.ts` | Brand colours, fonts and shadows |
+
+## Editing content
+
+- **Company details, navigation and enquiry types:** `lib/site.ts`
+- **Colours and fonts:** `tailwind.config.ts`
+- **Section copy:** the matching file in `components/` (for example `components/services.tsx` for Our Services)
+
+## Running locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open http://localhost:3000. In development the enquiry form logs submissions to the terminal instead of sending email.
+Open http://localhost:3000.
 
-## Enquiry form email
-
-Enquiries are emailed through [Resend](https://resend.com). Copy `.env.example` to `.env.local` and fill in:
-
-| Variable | What it is |
-| --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | The live site address, e.g. `https://www.belloakholdings.co.uk` |
-| `RESEND_API_KEY` | API key from Resend |
-| `ENQUIRY_TO_EMAIL` | Inbox that receives enquiries (comma-separate for more than one) |
-| `ENQUIRY_FROM_EMAIL` | Sender on a domain verified in Resend, e.g. `Bell Oak Website <website@belloakholdings.co.uk>` |
-
-In production the form shows an error, and logs why, if these are missing, so enquiries are never silently lost. Replies go straight to the person who enquired (the `reply_to` header).
-
-Spam protection: a hidden honeypot field plus a limit of 5 enquiries per IP address every 10 minutes.
-
-## Deploy (Vercel)
-
-1. Push this folder to a GitHub repository.
-2. Import it at https://vercel.com/new. Vercel detects Next.js automatically.
-3. Add the four environment variables above under Project Settings → Environment Variables.
-4. Add the custom domain under Project Settings → Domains and follow the DNS instructions.
-
-Netlify or any Node host also works: `npm run build`, then `npm start`.
-
-## Where to change things
-
-| What | File |
-| --- | --- |
-| Company name, number, address, phone, nav, enquiry types | `lib/site.ts` |
-| Colours, fonts, shadows | `tailwind.config.ts` |
-| Page sections | `components/*.tsx` |
-| Privacy notice | `app/privacy/page.tsx` |
-| Form email handling | `app/api/enquiry/route.ts` |
-
-## Before launch
-
-- Fill in the `[placeholders]` in `app/privacy/page.tsx`: contact email, ICO registration number, hosting and email providers, retention period. Pay the ICO data protection fee if it hasn't been paid.
-- Confirm the "Investment Partnerships" wording with a solicitor (financial promotion rules, FSMA section 21).
-- Set `NEXT_PUBLIC_SITE_URL` so the sitemap and social previews use the real domain.
-
-## Checks
+Checks:
 
 ```bash
 npm run lint
 npm run build
 ```
+
+## Environment variables
+
+See `.env.example`.
+
+| Variable | What it is for |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | The public site address, used in SEO metadata and the sitemap |
+| `RESEND_API_KEY` | API key for sending enquiry emails through Resend |
+| `ENQUIRY_TO_EMAIL` | Inbox that receives enquiries (comma-separate for more than one) |
+| `ENQUIRY_FROM_EMAIL` | Sender address shown on enquiry emails |

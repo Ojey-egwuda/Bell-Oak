@@ -5,9 +5,10 @@ export const site = {
   tagline: "Real Estate Investment",
   description:
     "Bell Oak Holdings Ltd is a UK-based real estate investment company focused on acquiring, managing, and developing property assets that generate sustainable growth and long-term value.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.example.co.uk",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.belloakholdings.co.uk",
   companyNumber: "17464434",
   registeredIn: "England and Wales",
+  email: "enquiries@belloakholdings.co.uk",
   phone: { display: "01865 641961", href: "tel:+441865641961" },
   address: {
     lines: ["71-75 Shelton Street", "Covent Garden", "London WC2H 9JQ", "United Kingdom"],

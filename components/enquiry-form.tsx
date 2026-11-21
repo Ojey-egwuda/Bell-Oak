@@ -44,7 +44,7 @@ export function EnquiryForm() {
       });
       if (!res.ok) throw new Error(String(res.status));
       setSuccessMessage(
-        `Thank you, ${fullName}. Your ${enquiryType.toLowerCase()} has been recorded for Bell Oak Holdings Ltd. A member of our London office will respond to ${email} shortly.`,
+        `Thank you, ${fullName}. Your ${enquiryType.toLowerCase()} has been recorded for Bell Oak Holdings Ltd. A member of our team will respond to ${email} shortly.`,
       );
       setStatus("sent");
       form.reset();

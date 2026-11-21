@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   description: `How ${site.name} uses the personal information you send us.`,
 };
 
-// DRAFT: have this reviewed before launch. Items in [square brackets] need the company's details.
+// Review this notice whenever the way we handle enquiries changes.
 export default function PrivacyPage() {
   return (
     <main id="top" className="py-20 sm:py-28 bg-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionLabel>Legal</SectionLabel>
         <h1 className="font-serif text-3xl sm:text-4xl font-semibold text-forest tracking-tight">Privacy Notice</h1>
-        <p className="mt-3 text-sm text-slatebody">Last updated: [DATE]</p>
+        <p className="mt-3 text-sm text-slatebody">Last updated: 21 November 2026</p>
 
         <div className="mt-10 space-y-8 text-base sm:text-[17px] text-slatebody leading-relaxed [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-forest [&_h2]:mb-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1">
           <section>
@@ -26,7 +26,11 @@ export default function PrivacyPage() {
               <a className="underline text-forest" href={site.phone.href}>
                 {site.phone.display}
               </a>{" "}
-              or at [EMAIL ADDRESS]. Our ICO registration number is [ICO NUMBER].
+              or at{" "}
+              <a className="underline text-forest" href={`mailto:${site.email}`}>
+                {site.email}
+              </a>
+              .
             </p>
           </section>
 
@@ -48,14 +52,14 @@ export default function PrivacyPage() {
             <h2>Who we share it with</h2>
             <p>
               We do not sell your information. We use a small number of service providers to run this website and deliver email, who
-              process it on our behalf: [HOSTING PROVIDER] and [EMAIL PROVIDER]. Where they process data outside the UK, appropriate
+              process it on our behalf: Netlify (website hosting) and Resend (email delivery). Where they process data outside the UK, appropriate
               safeguards are in place.
             </p>
           </section>
 
           <section>
             <h2>How long we keep it</h2>
-            <p>We keep enquiries for [12 months] unless they lead to an ongoing relationship, in which case we keep them for as long as needed for that purpose and our legal obligations.</p>
+            <p>We keep enquiries for 12 months unless they lead to an ongoing relationship, in which case we keep them for as long as needed for that purpose and our legal obligations.</p>
           </section>
 
           <section>

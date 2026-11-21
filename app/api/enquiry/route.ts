@@ -62,7 +62,10 @@ async function sendEmail(enquiry: Enquiry) {
 }
 
 export async function POST(request: Request) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const ip =
+    request.headers.get("x-nf-client-connection-ip")?.trim() ||
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    "unknown";
   if (rateLimited(ip)) {
     return NextResponse.json({ ok: false, error: "Too many enquiries. Please try again later." }, { status: 429 });
   }
