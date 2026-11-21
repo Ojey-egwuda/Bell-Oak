@@ -9,6 +9,7 @@ export const site = {
   companyNumber: "17464434",
   registeredIn: "England and Wales",
   email: "enquiries@belloakholdings.co.uk",
+  privacyEmail: "privacy@belloakholdings.co.uk",
   phone: { display: "01865 641961", href: "tel:+441865641961" },
   address: {
     lines: ["71-75 Shelton Street", "Covent Garden", "London WC2H 9JQ", "United Kingdom"],

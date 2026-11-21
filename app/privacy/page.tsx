@@ -27,8 +27,8 @@ export default function PrivacyPage() {
                 {site.phone.display}
               </a>{" "}
               or at{" "}
-              <a className="underline text-forest" href={`mailto:${site.email}`}>
-                {site.email}
+              <a className="underline text-forest" href={`mailto:${site.privacyEmail}`}>
+                {site.privacyEmail}
               </a>
               .
             </p>
@@ -71,7 +71,11 @@ export default function PrivacyPage() {
               <li>object to or restrict how we use it</li>
             </ul>
             <p className="mt-3">
-              To use any of these rights, contact us using the details above. If you are unhappy with how we handle your information you
+              To use any of these rights, email us at{" "}
+              <a className="underline text-forest" href={`mailto:${site.privacyEmail}`}>
+                {site.privacyEmail}
+              </a>
+              . If you are unhappy with how we handle your information you
               can complain to the Information Commissioner&apos;s Office at{" "}
               <a className="underline text-forest" href="https://ico.org.uk/make-a-complaint/" rel="noopener noreferrer" target="_blank">
                 ico.org.uk
